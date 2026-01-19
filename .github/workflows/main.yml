@@ -1,8 +1,8 @@
-name: Karbala-Final
+name: Raja-Gate-Final
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 */6 * * *'
-  workflow_dispatch:
 jobs:
   stream:
     runs-on: ubuntu-latest
