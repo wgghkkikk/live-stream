@@ -1,18 +1,14 @@
-name: Raja-Gate-Final
+name: Karbala-Final-Mega-Stream
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */6 * * *'
 jobs:
-  stream:
+  mega_stream:
     runs-on: ubuntu-latest
     steps:
-      - name: Install
+      - name: 1-Update-System
+        run: sudo apt-get update
+      - name: 2-Install-FFMPEG
+        run: sudo apt-get install -y ffmpeg
+      - name: 3-Start-Final-Broadcast
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-          pip install yt-dlp
-      - name: Start
-        run: |
-          url=$(yt-dlp -f "best[height<=720]" -g "https://www.youtube.com/watch?v=v4fW-Jmo8qo")
-          ffmpeg -re -i "$url" -c:v libx264 -preset ultrafast -b:v 2000k -c:a aac -f flv "rtmp://a.rtmp.youtube.com/live2/bxv1-229e-2p3p-j3fb-9rfp"
+          ffmpeg -re -i "https://shia.itv.ovh/hls/karbala.m3u8" -c:v libx264 -preset ultrafast -tune zerolatency -b:v 2000k -c:a aac -b:a 128k -ar 44100 -f flv "rtmp://a.rtmp.youtube.com/live2/bxv1-229e-2p3p-j3fb-9rfp"
