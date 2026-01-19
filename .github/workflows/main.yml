@@ -1,14 +1,10 @@
-name: Raja-Gate
+name: Live-Final
 on:
   workflow_dispatch:
 jobs:
-  stream:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Start
+      - name: Start-Stream
         run: |
-          sudo apt-get update && sudo apt-get install -y ffmpeg
-          pip install yt-dlp
-          url=$(yt-dlp -f "best[height<=720]" -g "https://www.youtube.com/watch?v=v4fW-Jmo8qo")
-          ffmpeg -re -i "$url" -c:v libx264 -preset ultrafast -b:v 2000k -c:a aac -f flv "rtmp://a.rtmp.youtube.com/live2/bxv1-229e-2p3p-j3fb-9rfp"
+          sudo apt-get update && sudo apt-get install -y ffmpeg && pip install yt-dlp && url=$(yt-dlp -f "best[height<=720]" -g "https://www.youtube.com/watch?v=v4fW-Jmo8qo") && ffmpeg -re -i "$url" -c:v libx264 -preset ultrafast -b:v 2000k -c:a aac -f flv "rtmp://a.rtmp.youtube.com/live2/q12g-s6wc-0y03-0ua5-6e6p"
